@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   red: {
     //flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: 'red',    
   },
   green: {
     //flex: 2,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',//row,row-reverse, column, column-reverse
     backgroundColor: "#fff",
-    alignItems: "baseline",//center,flex-start, flex-end, stretch
+    alignItems: "baseline",//center,flex-start, flex-end, stretch, baseline
     justifyContent: "space-evenly",//center, flex-start, flex-end, space-between, space-around, space-evenly
   },
 });
