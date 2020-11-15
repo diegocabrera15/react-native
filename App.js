@@ -1,13 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, TextInput, View, Dimensions } from "react-native";
 
-const width = Dimensions.get('window').width
+//const {width, height} = Dimensions.get('window')
+
 export default function App() {
+  const [text, setText] = useState('Chanchito feliz')
   return (
     <View style={styles.container}>
-      <Text>Text</Text>
-      <TextInput style={styles.input}></TextInput>
+      <Text>Text: {text}</Text>
+      <TextInput style={styles.input} 
+      placeholder='Escriba un texto' 
+      onChangeText={t =>setText(t)}
+      defaultValue={text}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,8 +22,9 @@ export default function App() {
 const styles = StyleSheet.create({  
   input: {
     height:40,
-    width: width,//'100%',
-    backgroundColor: '#eee'
+    width: '100%',//width
+    borderBottomColor:'#eee',
+    borderBottomWidth: 1
   },
   container: {
     flex: 1,
