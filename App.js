@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, Image, View} from "react-native";
+import { StyleSheet, ImageBackground, View, Text,} from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Image 
+      <ImageBackground
         style={styles.photo}
         source={{uri:'https://placedog.net/500/280'}}
-      />
+      >
+        <Text>Caddy</Text>
+      </ImageBackground>
     </View>
   );
 }
