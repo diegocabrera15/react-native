@@ -1,28 +1,21 @@
-import React, {useState} from "react";
-import { StyleSheet, Modal, View, Text, Button, Alert, } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import * as Location from "expo-location";
+import Constants from "expo-constants";
 
-const createDialog = () => Alert.alert(
-  'dialog title', 
-  'sub title or message for dialog',
-  [
-    {
-      text: 'Cancel',
-      onPress: ()=>{},
-      style: "cancel"
-    },
-    {
-      text: 'Accept',
-      onPress: ()=>console.log('boton press'),
-    }
-  ]
-  )
 export default function App() {
-  const [modal, setModal] = useState(false)
-  return (
-    <View style={styles.container}>
-      <Button title='Open dialog' onPress={createDialog}/>
-    </View>
-  );
+  const findLocation = async () => {
+    const { status } = await Location.requestPermissionsAsync();
+    if (status !== "granted") {
+      return Alert.alert("We dont have permissions");
+    }
+    const location = await Location.getCurrentPositionAsync();
+    console.log(location);
+  };
+  useEffect(() => {
+    findLocation();
+  });
+  return <View style={styles.container}></View>;
 }
 
 const styles = StyleSheet.create({
@@ -32,5 +25,5 @@ const styles = StyleSheet.create({
     alignItems: "stretch", //center,flex-start, flex-end, stretch, baseline
     justifyContent: "center", //center, flex-start, flex-end, space-between, space-around, space-evenly
     paddingTop: 22,
-  },  
+  },
 });
