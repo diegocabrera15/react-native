@@ -1,17 +1,22 @@
 import React from "react";
-import { StyleSheet, ActivityIndicator, View} from "react-native";
+import { StyleSheet, Image, View} from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator 
-        size='small' color='#000f'
+      <Image 
+        style={styles.photo}
+        source={require('./assets/icon.png')}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  photo: {
+    height: 60,
+    width: 60
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
