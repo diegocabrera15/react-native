@@ -1,23 +1,46 @@
-import React from "react";
-import { StyleSheet, ImageBackground, View, Text,} from "react-native";
+import React, {useState} from "react";
+import { StyleSheet, Modal, View, Text, Button, } from "react-native";
 
 export default function App() {
+  const [modal, setModal] = useState(false)
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.photo}
-        source={{uri:'https://placedog.net/500/280'}}
+      <Modal 
+        animationType="slide"
+        transparent={true}
+        visible={modal}
+        //onRequestClose permite ejecutar codigo cuando sea haya cerrado el modal
       >
-        <Text>Caddy</Text>
-      </ImageBackground>
+        <View style={styles.center}>
+          <View style={styles.content}>
+            <Text>Soy un modal</Text>
+            <Button title='Cerrar modal' onPress={()=>setModal(!modal)}/>
+          </View>
+        </View>
+      </Modal>
+      <Text>No soy un modal</Text>
+      <Text>No soy un modal</Text>
+      <Text>No soy un modal</Text>
+      <Text>No soy un modal</Text>
+      <Text>No soy un modal</Text>
+      <Button title='Abrir modal' onPress={()=>setModal(!modal)}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  photo: {
-    height: 500,
-    width: 280
+  content: {
+    flex:1,
+    backgroundColor: '#eee',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin:25
+  },
+  center: {
+    flex:1,
+    alignItems:'stretch',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)'
   },
   container: {
     flex: 1,
