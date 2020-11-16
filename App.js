@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
+import MapView from 'react-native-maps'
 import * as Location from "expo-location";
 import Constants from "expo-constants";
+
 
 export default function App() {
   const findLocation = async () => {
@@ -15,10 +17,20 @@ export default function App() {
   useEffect(() => {
     findLocation();
   });
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      <MapView 
+        style={styles.map}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
+  map:{
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
