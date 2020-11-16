@@ -6,7 +6,7 @@ export default function App() {
     <View style={styles.container}>
       <Image 
         style={styles.photo}
-        source={require('./assets/icon.png')}
+        source={{uri:'https://placedog.net/500/280'}}
       />
     </View>
   );
@@ -14,8 +14,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   photo: {
-    height: 60,
-    width: 60
+    height: 500,
+    width: 280
   },
   container: {
     flex: 1,
