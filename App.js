@@ -1,45 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
-import MapView, { Marker } from 'react-native-maps'
-import * as Location from "expo-location";
-import Constants from "expo-constants";
-
+import { StyleSheet, View, Text, Button } from "react-native";
+import { Camera } from "expo-camera";
 
 export default function App() {
-  const [locationCurrent, setLocationCurrent] = useState({})
-  const findLocation = async () => {
-    const { status } = await Location.requestPermissionsAsync();
-    if (status !== "granted") {
-      return Alert.alert("We dont have permissions");
-    }
-    const location = await Location.getCurrentPositionAsync({});
-    console.log(location);
-    setLocationCurrent(location)
+  const [permissions, setPermissions] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+
+  const getPermissions = async () => {
+    const { status } = await Camera.requestPermissionsAsync();
+    setPermissions(status == "granted");
   };
   useEffect(() => {
-    findLocation();
+    getPermissions();
   });
+  if (permissions === null) {
+    return (
+      <View>
+        <Text>Wating for permission</Text>
+      </View>
+    );
+  }
+  if (permissions === false) {
+    return (
+      <View>
+        <Text>We can't access to camera :(</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}>
-        {locationCurrent.coords ? 
-          <Marker
-          coordinate={locationCurrent.coords}
-          title="Title"
-          description="Description point"/>
-          :
-          null
-            
-        }
-      </MapView>
+      <Camera style={styles.camera} type={type}>
+        <Button
+          title="Chance camera"
+          onPress={() => {
+            const { front, back } = Camera.Constants.Type;
+            const newType = type === back ? front : back;
+            setType(newType);
+          }}
+        />
+      </Camera>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  map:{
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+  camera: {
+    flex: 1,
   },
   container: {
     flex: 1,
